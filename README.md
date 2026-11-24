@@ -1,57 +1,111 @@
-SkillLens
-Comparing Encoder Fine-Tuning and Large Language Models for Skill Extraction and ESCO Normalisation in Job Postings
-Data Science Capstone Project · Winter 2026/2027 Team: Arshi Zabeen Khan · Yashwanth Reddy Shyamakura Supervisor: Dr. Humera Noor
-Status: Proposal stage (Sprint 0). Code development starts in Sprint 1 (26 October 2026). No results yet.
+# SkillLens
 
-What this project does
+**Comparing encoder fine-tuning and large language models for skill extraction and ESCO normalisation in job postings**
+
+Data Science Capstone Project · Winter 2026/2027
+**Team:** Arshi Zabeen Khan · Yashwanth Reddy Shyamakura
+**Supervisor:** Dr. Humera Noor
+
+![tests](https://github.com/arshizk/SkillLens/actions/workflows/tests.yml/badge.svg)
+
+> **Status:** Sprint 3 (23 Nov – 6 Dec 2026). Data pipeline, evaluation and the dictionary baseline are done. BERT fine-tuning and USAJOBS collection are in progress.
+
+## What this project does
+
 Job postings describe required skills in free text. "ML", "machine-learning models" and "build predictive models in Python" can all mean the same skill, which makes skill demand hard to measure.
 
 SkillLens will:
-Extract skill and knowledge mentions from English job postings.
-Link them to ESCO, the European Commission's skills taxonomy.
-Show skill demand across data and IT job families in an API and a dashboard.
 
-The core research question: which approach gives the best accuracy for its cost — a simple dictionary baseline, fine-tuned BERT-style encoders, or large language models?
+- **Extract** skill and knowledge mentions from English job postings.
+- **Link** them to [ESCO](https://esco.ec.europa.eu/), the European Commission's skills taxonomy.
+- **Show** skill demand across data and IT job families in an API and a dashboard.
 
-Research questions
-ID	Question
-RQ1	How do a dictionary baseline, fine-tuned BERT, a domain-adapted encoder (JobSpanBERT) and LLMs compare on span-level F1?
-RQ2	How well do models trained on one source generalise to job postings from other sources?
-RQ3	What are the latency and compute cost of each approach?
-RQ4	How accurately can extracted skills be linked to ESCO concepts?
-RQ5	What skill-demand differences appear across data and IT roles?
+The core question: which approach gives the best accuracy for its cost? We compare a simple dictionary baseline, fine-tuned BERT-style encoders and large language models.
 
+## Research questions
 
-Data
+| ID | Question |
+| --- | --- |
+| RQ1 | How do a dictionary baseline, fine-tuned BERT, a domain-adapted encoder (JobSpanBERT) and LLMs compare on span-level F1? |
+| RQ2 | How well do models trained on one source generalise to job postings from other sources? |
+| RQ3 | What are the latency and compute cost of each approach? |
+| RQ4 | How accurately can extracted skills be linked to ESCO concepts? |
+| RQ5 | What skill-demand differences appear across data and IT roles? |
 
-Only real, publicly available data is used. No Kaggle or synthetic datasets.
-Dataset	Source	Use
-SkillSpan	Zhang et al., NAACL 2022	Training and testing (expert-annotated)
-Green et al. corpus	Green, Maynard & Lin, LREC 2022	Second test set
-ESCO v1.2	European Commission	Skill taxonomy for linking
-USAJOBS API	U.S. Office of Personnel Management	Real postings: new test set (annotated by both team members), analytics and demo
+## Data
 
+Only real, publicly available data is used. No Kaggle or synthetic datasets. Datasets are **not** committed to this repository; scripts in `scripts/` download them.
 
-Datasets are not committed to this repository. They will be downloaded by scripts in scripts/.
+| Dataset | Source | Use |
+| --- | --- | --- |
+| SkillSpan | Zhang et al., NAACL 2022 | Training and testing (expert-annotated) |
+| Green et al. corpus | Green, Maynard & Lin, LREC 2022 | Second test set |
+| ESCO v1.2 | European Commission | Skill taxonomy for linking |
+| USAJOBS API | U.S. Office of Personnel Management | Current real postings: new test set, skill-demand analytics and demo |
 
-Planned approach
-Baselines: ESCO dictionary matching (B0), fine-tuned bert-base-cased (B1)
-Models: fine-tuned JobSpanBERT (M1), few-shot open-weight LLM (M2), optional QLoRA-fine-tuned small LLM (M3)
-Linking: sentence embeddings + FAISS nearest-neighbour search over ESCO skills
-Evaluation: strict and partial span F1 (3 seeds, mean ± std), Recall@1/@5 for linking, inter-annotator agreement for our own labels
+## Progress
 
-Repository structure
-skilllens/
+| Sprint | Dates | Done |
+| --- | --- | --- |
+| 0 | Oct 2026 | Proposal approved, repository and project plan set up |
+| 1–2 | 26 Oct – 22 Nov | SkillSpan download and exploration ([report](reports/eda_skillspan.md)), span-level evaluation (strict and partial F1), dictionary baseline B0 ([results](reports/baseline_dev.md)), unit tests |
+| 3 | 23 Nov – 6 Dec | BERT / JobSpanBERT fine-tuning on Colab, USAJOBS collector and cleaner, first skill-demand table (core MVP) |
+
+## Current results (SkillSpan dev set)
+
+| Model | Strict F1: Skill | Strict F1: Knowledge | Strict F1: overall | Partial F1: overall |
+| --- | --- | --- | --- | --- |
+| B0 Dictionary baseline | 0.149 | 0.412 | **0.308** | 0.418 |
+| B1 bert-base-cased | *Sprint 3* | | | |
+| M1 JobSpanBERT | *Sprint 3* | | | |
+
+The dictionary finds short knowledge terms ("python", "docker") reasonably well but finds under 10% of skills. Skills are longer (4.4 tokens on average vs 1.8 for knowledge) and phrased differently each time. This is the gap the fine-tuned encoders have to close.
+
+## Approach
+
+- **Baselines:** dictionary matching (B0), fine-tuned `bert-base-cased` (B1)
+- **Models:** fine-tuned JobSpanBERT (M1), few-shot open-weight LLM (M2), optional QLoRA-fine-tuned small LLM (M3)
+- **Linking:** sentence embeddings + FAISS nearest-neighbour search over ESCO skills
+- **Evaluation:** strict and partial span F1, Recall@1/@5 for linking, inter-annotator agreement for our own labels
+
+## How to run
+
+```bash
+git clone https://github.com/arshizk/SkillLens.git
+cd SkillLens
+python -m venv venv
+venv\Scripts\activate            # macOS/Linux: source venv/bin/activate
+pip install -r requirements.txt
+
+python scripts/download_skillspan.py   # get the data
+python scripts/eda_skillspan.py        # data exploration -> reports/
+python scripts/run_baseline.py         # dictionary baseline -> reports/baseline_dev.md
+python -m pytest                       # unit tests
+```
+
+- **BERT training** runs on Google Colab: upload `notebooks/train_bert_colab.ipynb` and choose a T4 GPU runtime.
+- **USAJOBS collection** needs a free API key in a local `.env` file (see `.env.example`), then `python scripts/collect_usajobs.py` and `python scripts/clean_usajobs.py`.
+- Step-by-step setup for team members: [START_HERE.md](START_HERE.md).
+
+## Repository structure
+
+```
+SkillLens/
+├── src/skilllens/    package: data loading, spans, evaluation, extractors, USAJOBS cleaning
+├── scripts/          download, exploration, baseline and USAJOBS collection scripts
+├── tests/            unit tests (run automatically on every push)
+├── notebooks/        Colab notebook for BERT / JobSpanBERT training
+├── reports/          results and progress reports
 ├── configs/          experiment configuration files
-├── data/             local data only (git-ignored)
-├── scripts/          dataset download and collection scripts
-├── src/skilllens/    package: preprocessing, extraction, linking, evaluation, API
-├── dashboard/        Streamlit app
-├── notebooks/        exploratory analysis
 ├── annotations/      annotation guidelines and gold labels
-├── reports/          progress reports and final report
-└── tests/            unit and integration tests
+├── dashboard/        Streamlit app (Sprint 4)
+└── data/             local data only (git-ignored)
+```
 
-Tech stack
+## Tech stack
 
-Python · PyTorch · Hugging Face Transformers · PEFT · sentence-transformers · FAISS · DuckDB · FastAPI · Streamlit · MLflow · pytest · GitHub Actions
+Python · PyTorch · Hugging Face Transformers · sentence-transformers · FAISS · DuckDB · FastAPI · Streamlit · MLflow · pytest · GitHub Actions
+
+## Licence
+
+Code: MIT. Datasets keep their original licences.
