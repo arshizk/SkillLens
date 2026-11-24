@@ -1,0 +1,936 @@
+{
+ "model": "bert-base-cased",
+ "split": "dev",
+ "epochs": 3,
+ "lr": 5e-05,
+ "batch": 16,
+ "max_len": 256,
+ "seed": 42,
+ "results": {
+  "strict": {
+   "Skill": {
+    "precision": 0.4567,
+    "recall": 0.5075,
+    "f1": 0.4807,
+    "tp": 543,
+    "pred": 1189,
+    "gold": 1070
+   },
+   "Knowledge": {
+    "precision": 0.5354,
+    "recall": 0.6295,
+    "f1": 0.5786,
+    "tp": 688,
+    "pred": 1285,
+    "gold": 1093
+   },
+   "overall": {
+    "precision": 0.4976,
+    "recall": 0.5691,
+    "f1": 0.5309,
+    "tp": 1231,
+    "pred": 2474,
+    "gold": 2163
+   }
+  },
+  "partial": {
+   "Skill": {
+    "precision": 0.6972,
+    "recall": 0.7748,
+    "f1": 0.734,
+    "tp": 829,
+    "pred": 1189,
+    "gold": 1070
+   },
+   "Knowledge": {
+    "precision": 0.6817,
+    "recall": 0.8015,
+    "f1": 0.7368,
+    "tp": 876,
+    "pred": 1285,
+    "gold": 1093
+   },
+   "overall": {
+    "precision": 0.6892,
+    "recall": 0.7883,
+    "f1": 0.7354,
+    "tp": 1705,
+    "pred": 2474,
+    "gold": 2163
+   }
+  }
+ },
+ "examples": [
+  {
+   "tokens": [
+    "DevOps",
+    "Engineer",
+    "(",
+    "CI",
+    "CD",
+    "Cloud",
+    "Docker",
+    "Jenkins",
+    ")",
+    "<ORGANIZATION>"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "<ADDRESS>",
+    "<ADDRESS>",
+    "<LOCATION>",
+    "-",
+    "<LOCATION>"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Date",
+    "posted:",
+    "2021-04-22"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Likes:",
+    "0",
+    "Dislikes:",
+    "0",
+    "Love:",
+    "0"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Job",
+    "description:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Job",
+    "type:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Full-time"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Experience",
+    "level:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Senior"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Role:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "DevOps"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Industry:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Consulting",
+    "Information",
+    "Technology",
+    "IT",
+    "Consulting"
+   ],
+   "gold": [
+    [
+     0,
+     1,
+     "Knowledge"
+    ],
+    [
+     1,
+     3,
+     "Knowledge"
+    ],
+    [
+     3,
+     5,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     0,
+     1,
+     "Knowledge"
+    ],
+    [
+     1,
+     3,
+     "Knowledge"
+    ],
+    [
+     3,
+     5,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Company",
+    "size:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "51\u2013200",
+    "people"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Company",
+    "type:"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Private"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Technologies"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "cloud",
+    "amazon-web-services",
+    "azure",
+    "devops",
+    "automation"
+   ],
+   "gold": [
+    [
+     0,
+     1,
+     "Knowledge"
+    ],
+    [
+     1,
+     2,
+     "Knowledge"
+    ],
+    [
+     2,
+     3,
+     "Knowledge"
+    ],
+    [
+     3,
+     4,
+     "Knowledge"
+    ],
+    [
+     4,
+     5,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     0,
+     1,
+     "Knowledge"
+    ],
+    [
+     1,
+     2,
+     "Knowledge"
+    ],
+    [
+     2,
+     3,
+     "Knowledge"
+    ],
+    [
+     3,
+     4,
+     "Knowledge"
+    ],
+    [
+     4,
+     5,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Job",
+    "description"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "We",
+    "are",
+    "in",
+    "growth",
+    "mode",
+    "and",
+    "looking",
+    "for",
+    "high",
+    "calibre",
+    "deeply",
+    "experienced",
+    "hands-on",
+    "DevOps",
+    "engineers",
+    "who",
+    "seek",
+    "to",
+    "be",
+    "recognized",
+    "as",
+    "platform",
+    "technology",
+    "leaders",
+    "growing",
+    "our",
+    "practice",
+    "."
+   ],
+   "gold": [
+    [
+     8,
+     10,
+     "Skill"
+    ],
+    [
+     11,
+     12,
+     "Skill"
+    ],
+    [
+     12,
+     13,
+     "Skill"
+    ]
+   ],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "You",
+    "will",
+    "work",
+    "as",
+    "part",
+    "of",
+    "our",
+    "Agile",
+    "hybrid",
+    "DevOps",
+    "teams",
+    "to",
+    "help",
+    "develop/configure",
+    "new",
+    "tools",
+    "roll",
+    "out",
+    "environments",
+    "and",
+    "automate",
+    "processes",
+    "using",
+    "a",
+    "variety",
+    "of",
+    "tools",
+    "and",
+    "techniques",
+    "."
+   ],
+   "gold": [
+    [
+     13,
+     16,
+     "Skill"
+    ],
+    [
+     16,
+     19,
+     "Skill"
+    ],
+    [
+     20,
+     22,
+     "Skill"
+    ]
+   ],
+   "pred": [
+    [
+     13,
+     16,
+     "Skill"
+    ],
+    [
+     16,
+     19,
+     "Skill"
+    ],
+    [
+     20,
+     29,
+     "Skill"
+    ],
+    [
+     7,
+     8,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "This",
+    "role",
+    "will",
+    "give",
+    "you",
+    "the",
+    "opportunity",
+    "to",
+    "leverage",
+    "your",
+    "current",
+    "technical",
+    "skills",
+    "whilst",
+    "building",
+    "your",
+    "knowledge",
+    "on",
+    "the",
+    "job",
+    "."
+   ],
+   "gold": [],
+   "pred": [
+    [
+     8,
+     13,
+     "Skill"
+    ],
+    [
+     14,
+     20,
+     "Skill"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "The",
+    "ideal",
+    "candidate",
+    "will",
+    "have",
+    "a",
+    "desire",
+    "to",
+    "be",
+    "at",
+    "the",
+    "forefront",
+    "of",
+    "change",
+    "and",
+    "a",
+    "real",
+    "passion",
+    "for",
+    "DevOps!"
+   ],
+   "gold": [
+    [
+     8,
+     14,
+     "Skill"
+    ],
+    [
+     19,
+     20,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     19,
+     20,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Who",
+    "we",
+    "are",
+    "looking",
+    "for"
+   ],
+   "gold": [],
+   "pred": []
+  },
+  {
+   "tokens": [
+    "Senior",
+    "DevOps",
+    "engineers",
+    "experienced",
+    "in",
+    "cloud",
+    "adoption",
+    "and",
+    "migration",
+    "with",
+    "excellent",
+    "comprehension",
+    "of",
+    "modern",
+    "engineering",
+    "from",
+    "toolsets",
+    "to",
+    "methods",
+    "practices",
+    "to",
+    "technologies",
+    "."
+   ],
+   "gold": [
+    [
+     5,
+     9,
+     "Knowledge"
+    ],
+    [
+     13,
+     22,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     5,
+     7,
+     "Knowledge"
+    ],
+    [
+     8,
+     9,
+     "Knowledge"
+    ],
+    [
+     13,
+     15,
+     "Knowledge"
+    ],
+    [
+     16,
+     17,
+     "Knowledge"
+    ],
+    [
+     18,
+     20,
+     "Knowledge"
+    ],
+    [
+     21,
+     22,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "High",
+    "level",
+    "and",
+    "deep",
+    "technical",
+    "experience",
+    "with",
+    "continuous",
+    "integration",
+    "continuous",
+    "delivery/deployment",
+    "particularly",
+    "Jenkins",
+    "Travis",
+    "and/or",
+    "CircleCI"
+   ],
+   "gold": [
+    [
+     7,
+     9,
+     "Knowledge"
+    ],
+    [
+     9,
+     11,
+     "Knowledge"
+    ],
+    [
+     12,
+     13,
+     "Knowledge"
+    ],
+    [
+     13,
+     14,
+     "Knowledge"
+    ],
+    [
+     15,
+     16,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     7,
+     9,
+     "Knowledge"
+    ],
+    [
+     9,
+     11,
+     "Knowledge"
+    ],
+    [
+     12,
+     13,
+     "Knowledge"
+    ],
+    [
+     13,
+     14,
+     "Knowledge"
+    ],
+    [
+     15,
+     16,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Uses",
+    "testing",
+    "as",
+    "a",
+    "baseline",
+    "practice:",
+    "TDD",
+    "BDD",
+    "integration",
+    "E2E"
+   ],
+   "gold": [
+    [
+     0,
+     6,
+     "Skill"
+    ],
+    [
+     6,
+     7,
+     "Knowledge"
+    ],
+    [
+     7,
+     8,
+     "Knowledge"
+    ],
+    [
+     8,
+     9,
+     "Knowledge"
+    ],
+    [
+     9,
+     10,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     6,
+     7,
+     "Knowledge"
+    ],
+    [
+     7,
+     9,
+     "Knowledge"
+    ],
+    [
+     9,
+     10,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Understands",
+    "the",
+    "challenges",
+    "presented",
+    "by",
+    "cloud",
+    "adoption",
+    "and",
+    "migration",
+    "in",
+    "both",
+    "enterprise",
+    "and",
+    "green",
+    "field",
+    "contexts;",
+    "how",
+    "to",
+    "build",
+    "cloud",
+    "native",
+    "applications",
+    "scratch",
+    "and",
+    "how",
+    "to",
+    "tackle",
+    "monolithic",
+    "system",
+    "estates",
+    "through",
+    "the",
+    "introduction",
+    "of",
+    "API\u2019s",
+    "microservices",
+    "and",
+    "gateways"
+   ],
+   "gold": [
+    [
+     18,
+     23,
+     "Skill"
+    ],
+    [
+     26,
+     30,
+     "Skill"
+    ],
+    [
+     5,
+     9,
+     "Knowledge"
+    ],
+    [
+     11,
+     16,
+     "Knowledge"
+    ],
+    [
+     34,
+     35,
+     "Knowledge"
+    ],
+    [
+     35,
+     36,
+     "Knowledge"
+    ],
+    [
+     37,
+     38,
+     "Knowledge"
+    ]
+   ],
+   "pred": [
+    [
+     18,
+     23,
+     "Skill"
+    ],
+    [
+     26,
+     30,
+     "Skill"
+    ],
+    [
+     5,
+     7,
+     "Knowledge"
+    ],
+    [
+     8,
+     9,
+     "Knowledge"
+    ]
+   ]
+  },
+  {
+   "tokens": [
+    "Hands",
+    "on",
+    "practitioners",
+    "with",
+    "the",
+    "ability",
+    "to",
+    "demonstrate",
+    "and",
+    "communicate",
+    "at",
+    "all",
+    "levels",
+    "bringing",
+    "complex",
+    "technological",
+    "issues",
+    "into",
+    "perspective",
+    "for",
+    "specialists",
+    "and",
+    "laymen",
+    "alike",
+    "enabling",
+    "our",
+    "clients",
+    "to",
+    "adapt",
+    "to",
+    "changing",
+    "needs",
+    "improve",
+    "their",
+    "time",
+    "to",
+    "live",
+    "and",
+    "deliver",
+    "better",
+    "solutions",
+    "though",
+    "better",
+    "software",
+    "."
+   ],
+   "gold": [
+    [
+     0,
+     2,
+     "Skill"
+    ],
+    [
+     9,
+     13,
+     "Skill"
+    ],
+    [
+     13,
+     19,
+     "Skill"
+    ],
+    [
+     24,
+     32,
+     "Skill"
+    ],
+    [
+     38,
+     41,
+     "Skill"
+    ]
+   ],
+   "pred": [
+    [
+     0,
+     2,
+     "Skill"
+    ],
+    [
+     7,
+     13,
+     "Skill"
+    ],
+    [
+     13,
+     19,
+     "Skill"
+    ]
+   ]
+  }
+ ]
+}
