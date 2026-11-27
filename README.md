@@ -8,7 +8,7 @@ Data Science Capstone Project · Winter 2026/2027
 
 ![tests](https://github.com/arshizk/SkillLens/actions/workflows/tests.yml/badge.svg)
 
-> **Status:** Sprint 3 (23 Nov – 6 Dec 2026). Data pipeline, evaluation and the dictionary baseline are done. BERT fine-tuning and USAJOBS collection are in progress.
+> **Status:** Sprint 3 (23 Nov – 6 Dec 2026). Baseline, BERT and JobSpanBERT compared on SkillSpan; 431 USAJOBS postings collected. Now: extraction on USAJOBS and ESCO linking (core MVP, 6 Dec).
 
 ## What this project does
 
@@ -49,15 +49,17 @@ Only real, publicly available data is used. No Kaggle or synthetic datasets. Dat
 | --- | --- | --- |
 | 0 | Oct 2026 | Proposal approved, repository and project plan set up |
 | 1–2 | 26 Oct – 22 Nov | SkillSpan download and exploration ([report](reports/eda_skillspan.md)), span-level evaluation (strict and partial F1), dictionary baseline B0 ([results](reports/baseline_dev.md)), unit tests |
-| 3 | 23 Nov – 6 Dec | BERT / JobSpanBERT fine-tuning on Colab, USAJOBS collector and cleaner, first skill-demand table (core MVP) |
+| 3 | 23 Nov – 6 Dec | BERT and JobSpanBERT fine-tuned on Colab ([B1](reports/results_bert-base-cased_dev.json), [M1](reports/results_jobspanbert-base-cased_dev.json)); USAJOBS collector and cleaner ([summary](reports/usajobs_summary.md)); in progress: extraction on USAJOBS, ESCO linking, first skill-demand table (core MVP) |
 
 ## Current results (SkillSpan dev set)
 
 | Model | Strict F1: Skill | Strict F1: Knowledge | Strict F1: overall | Partial F1: overall |
 | --- | --- | --- | --- | --- |
 | B0 Dictionary baseline | 0.149 | 0.412 | **0.308** | 0.418 |
-| B1 bert-base-cased | *Sprint 3* | | | |
-| M1 JobSpanBERT | *Sprint 3* | | | |
+| B1 bert-base-cased | 0.481 | 0.579 | 0.531 | 0.735 |
+| **M1 JobSpanBERT** | **0.520** | **0.588** | **0.554** | **0.757** |
+
+Single run each (seed 42, 3 epochs). JobSpanBERT, pre-trained on job postings, is best and is used for the USAJOBS extraction.
 
 The dictionary finds short knowledge terms ("python", "docker") reasonably well but finds under 10% of skills. Skills are longer (4.4 tokens on average vs 1.8 for knowledge) and phrased differently each time. This is the gap the fine-tuned encoders have to close.
 
